@@ -5,6 +5,12 @@ const snake = [];
 let count = 0;
 let direction = 'right';
 
+const image = new Image(box, box);
+
+function drawImageActualSize() {
+  context.drawImage(this, food.x, food.y, this.width, this.height);
+}
+
 snake[0] = {
   x: 8 * box,
   y: 8 * box,
@@ -20,13 +26,13 @@ const position = () => {
 let food = position();
 
 const createBG = () => {
-  context.fillStyle = "lightgreen";
+  context.fillStyle = "#ffc107";
   context.fillRect(0, 0, 16 * box, 16 * box);
 };
 
 const createLittleSnake = () => {
   for (let i = 0; i < snake.length; i++) {
-    context.fillStyle = 'green';
+    context.fillStyle = '#fd7e14';
     context.fillRect(snake[i].x, snake[i].y, box, box);
   }
 };
@@ -40,8 +46,8 @@ const update = (event) => {
 };
 
 const drawFood = () => {
-  context.fillStyle = 'red';
-  context.fillRect(food.x, food.y, box, box);
+  image.src = './dio.png';
+  image.onload = drawImageActualSize;
 };
 
 document.addEventListener('keydown', update);
@@ -55,7 +61,7 @@ const startGame = () => {
   for (let i = 1; i < snake.length; i++) {
     if (snake[0].x === snake[i].x && snake[0].y === snake[i].y) {
       clearInterval(game);
-      alert(`😲 Game over 😭\n You eat ${count} foods`)
+      alert(`😲 Game over 😭\n\nYou eat ${count} 🥓`);
     }
   }
 
@@ -74,10 +80,8 @@ const startGame = () => {
   if (snakeX !== food.x || snakeY !== food.y) {
     snake.pop();
   } else {
-    console.log('Antes de comer:', count);
     count++;
     food = position()
-    console.log('Depois de comer:', count);
   }
 
   const newHead = {
