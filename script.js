@@ -3,16 +3,20 @@ const context = canvas.getContext("2d");
 const box = 32;
 const snake = [];
 let direction = 'right';
-const food = {
-  x: Math.floor(Math.random() * 15 + 1) * box,
-  y: Math.floor(Math.random() * 15 + 1) * box,
-};
-
 
 snake[0] = {
   x: 8 * box,
   y: 8 * box,
 };
+
+const position = () => {
+  return {
+    x: Math.floor(Math.random() * 15 + 1) * box,
+    y: Math.floor(Math.random() * 15 + 1) * box,
+  };
+}
+
+let food = position();
 
 const createBG = () => {
   context.fillStyle = "lightgreen";
@@ -59,7 +63,11 @@ const startGame = () => {
   if (direction === 'up') snakeY -= box;
   if (direction === 'down') snakeY += box;
 
-  snake.pop();
+  if (snakeX !== food.x || snakeY !== food.y) {
+    snake.pop();
+  } else {
+    food = position()
+  }
 
   const newHead = {
     x: snakeX,
