@@ -3,6 +3,11 @@ const context = canvas.getContext("2d");
 const box = 32;
 const snake = [];
 let direction = 'right';
+const food = {
+  x: Math.floor(Math.random() * 15 + 1) * box,
+  y: Math.floor(Math.random() * 15 + 1) * box,
+};
+
 
 snake[0] = {
   x: 8 * box,
@@ -29,6 +34,11 @@ const update = (event) => {
 
 };
 
+const drawFood = () => {
+  context.fillStyle = 'red';
+  context.fillRect(food.x, food.y, box, box);
+};
+
 document.addEventListener('keydown', update);
 
 const startGame = () => {
@@ -39,6 +49,7 @@ const startGame = () => {
 
   createBG();
   createLittleSnake();
+  drawFood();
 
   let snakeX = snake[0].x;
   let snakeY = snake[0].y;
