@@ -1,0 +1,13 @@
+body {
+  height: 95vh;
+  width: 95vw;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  color: #fd7e14;
+  font-family: cursive;
+  font-weight: bold;
+}
