@@ -3,7 +3,24 @@ const context = canvas.getContext("2d");
 const box = 32;
 const snake = [];
 let count = 0;
-let direction = 'right';
+let direction;
+
+const btnInitial = document.getElementById('btnInitial');
+const DIO = document.getElementById('dio');
+
+btnInitial.onclick = () => {
+  DIO.style.width = '100px';
+  DIO.style.height = '100px';
+
+  canvas.style.display = 'initial';
+  
+  btnInitial.style.height = '32px';
+  btnInitial.textContent = 'Reiniciar jogo';
+
+  btnInitial.onclick = () => {
+    window.location.reload(true);
+  }
+}
 
 const image = new Image(box, box);
 
@@ -42,7 +59,6 @@ const update = (event) => {
   if (event.keyCode === 38 && direction !== 'down') direction = 'up';
   if (event.keyCode === 39 && direction !== 'left') direction = 'right';
   if (event.keyCode === 40 && direction !== 'up') direction = 'down';
-
 };
 
 const drawFood = () => {
@@ -53,11 +69,11 @@ const drawFood = () => {
 document.addEventListener('keydown', update);
 
 const startGame = () => {
-  if (snake[0].x > 15 * box && direction === 'right') snake[0].x = 0;
-  if (snake[0].x < 0 * box && direction === 'left') snake[0].x = 16 * box;
-  if (snake[0].y > 15 * box && direction === 'down') snake[0].y = 0;
-  if (snake[0].y < 0 && direction === 'up') snake[0].y = 16 * box;
-
+  if (snake[0].x > 15 * box && direction !== 'left') snake[0].x = 0;
+  if (snake[0].x < 0 && direction !== 'right') snake[0].x = 15 * box;
+  if (snake[0].y > 15 * box && direction !== 'up') snake[0].y = 0;
+  if (snake[0].y < 0 && direction != 'down') snake[0].y = 15 * box;
+  
   for (let i = 1; i < snake.length; i++) {
     if (snake[0].x === snake[i].x && snake[0].y === snake[i].y) {
       clearInterval(game);

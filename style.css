@@ -11,3 +11,20 @@ body {
   font-family: cursive;
   font-weight: bold;
 }
+
+button {
+  font-family: fantasy;
+  font-size: 24px;
+  color: #fd7e14;
+  font-weight: bold;
+  
+  width: 200px;
+  height: 100px;
+  background-color: #ffc107cc;
+
+  margin-bottom: 16px;
+}
+
+canvas {
+  display: none;
+}
